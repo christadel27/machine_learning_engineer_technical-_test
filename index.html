@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediksi Harga Saham</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Plotly JS -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input, button {
+            padding: 8px 12px;
+            margin-top: 5px;
+        }
+        p.error {
+            color: red;
+            font-weight: bold;
+        }
+        p.result {
+            color: green;
+            font-weight: bold;
+        }
+        .graph-container {
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Prediksi Harga Penutupan Saham</h1>
+
+    <form method="post" action="/predict">
+        <label for="ticker">Kode Saham (contoh: BBCA.JK):</label><br>
+        <input type="text" id="ticker" name="ticker" required placeholder="Contoh: BBCA.JK">
+        <button type="submit">Prediksi</button>
+    </form>
+
+    {% if error %}
+        <p class="error">Error: {{ error }}</p>
+    {% endif %}
+
+    {% if result %}
+        <p class="result">{{ result }}</p>
+    {% endif %}
+
+    {% if graph %}
+        <div class="graph-container">{{ graph | safe }}</div>
+    {% endif %}
+</body>
+</html>
